@@ -7,12 +7,11 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class InvoiceItem {
+public class SaleInvoiceItem {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "invoice_id", referencedColumnName = "id")
-	private String invoiceId;
-	
+	private SaleInvoice saleInvoice;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "item_id", referencedColumnName = "id")

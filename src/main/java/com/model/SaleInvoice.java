@@ -3,19 +3,36 @@ package com.model;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class SaleInvoice extends Invoice {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	private Date date;
+	private double total;
+	private double paid;
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id", referencedColumnName = "id")
 	private Customer customer;
 
+	@Column(name="payment_type", nullable=false)
 	private String paymentType;
+	
+	@Column(name="payment_due", nullable=false)
 	private Date paymentDue;
+
+	
 	
 	public SaleInvoice(Customer customer, String paymentType, Date paymentDue) {
 		super();
